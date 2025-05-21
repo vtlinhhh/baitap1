@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Gallery</title>
+  <style>
+    img {
+      width: 200px;
+      margin: 10px;
+    }
+    .highlight {
+      border: 3px solid blue;
+    }
+  </style>
+</head>
+<body onload="initializeGallery()">
+
+  <h1>Thư viện ảnh của tôi</h1>
+
+  <div id="gallery">
+    <img src="img1.jpg" alt="Mô tả ảnh 1">
+    <img src="img2.jpg" alt="Mô tả ảnh 2">
+    <img src="img3.jpg" alt="Mô tả ảnh 3">
+    <img src="img4.jpg" alt="Mô tả ảnh 4">
+    <img src="img5.jpg" alt="Mô tả ảnh 5">
+    <img src="img6.jpg" alt="Mô tả ảnh 6">
+  </div>
+
+  <script>
+    function highlightImage(event) {
+      event.target.classList.add('highlight');
+      console.log("Mouse entered image");
+    }
+
+    function removeHighlight(event) {
+      event.target.classList.remove('highlight');
+      console.log("Mouse left image");
+    }
+
+    function focusImage(event) {
+      event.target.classList.add('highlight');
+      console.log("Image focused");
+    }
+
+    function blurImage(event) {
+      event.target.classList.remove('highlight');
+      console.log("Image lost focus");
+    }
+
+    function initializeGallery() {
+      const images = document.querySelectorAll('#gallery img');
+
+      for (let i = 0; i < images.length; i++) {
+        images[i].addEventListener('mouseover', highlightImage);
+        images[i].addEventListener('mouseleave', removeHighlight);
+        images[i].addEventListener('focus', focusImage);
+        images[i].addEventListener('blur', blurImage);
+
+        // Add tabindex so the image is focusable via keyboard
+        images[i].setAttribute('tabindex', '0');
+      }
+
+      console.log("Gallery initialized");
+    }
+  </script>
+</body>
+</html>
